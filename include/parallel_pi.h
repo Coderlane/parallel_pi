@@ -23,12 +23,6 @@ using std::uint64_t;
 class CircleSquare {
 
 	public:
-		CircleSquare(uint32_t radius);
-
-		bool IsInsideCircle(uint32_t x, uint32_t y);
-		bool IsInsideSquare(uint32_t x, uint32_t y);
-
-	private:
 		/**
 		 * @brief The input radius. 
 		 */
@@ -46,6 +40,12 @@ class CircleSquare {
 		 */
 		const uint64_t squared_radius;
 
+		CircleSquare(uint32_t radius);
+
+		bool IsInsideCircle(uint32_t x, uint32_t y);
+		bool IsInsideSquare(uint32_t x, uint32_t y);
+
+	private:
 		uint64_t GetSquaredDistance(uint32_t x, uint32_t y);
 };
 #endif
