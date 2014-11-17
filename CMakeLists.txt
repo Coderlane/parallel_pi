@@ -4,13 +4,13 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 PROJECT(ParallelPi)
 
 #Uncomment to make makefiles verbose
-#set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 OPTION(BUILD_CILK "Build cilk code" ON)
 OPTION(BUILD_OPENMP "Build OpenMP code" ON)
 
 if(BUILD_CILK)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DPARALLEL_PI_USE_CILK")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DPARALLEL_PI_USE_CILK -I ~/.local/include -fcilkplus -lcilkrts")
 endif()
 
 if(BUILD_OPENMP)

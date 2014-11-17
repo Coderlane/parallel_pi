@@ -13,7 +13,7 @@
 double
 cilk_estimate_pi(CircleSquare cs, uint64_t total_iterations)
 {
-	cilk::reducer_opadd<uint64_t> total_inside = 0;
+	cilk::reducer_opadd<uint64_t> total_inside(0);
 	cilk_for(uint64_t i; i < total_iterations; i++) {
 		uint32_t x, y;
 		x = 0;
