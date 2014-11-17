@@ -13,8 +13,7 @@
 double
 cilk_estimate_pi(CircleSquare cs, uint64_t total_iterations)
 {
-	uint64_t total_inside = 0;
-
+	cilk::reducer_opadd<uint64_t> total_inside = 0;
 	cilk_for(uint64_t i; i < total_iterations; i++) {
 		uint32_t x, y;
 		x = 0;
@@ -22,6 +21,8 @@ cilk_estimate_pi(CircleSquare cs, uint64_t total_iterations)
 		if(cs.IsInsideCircle(x, y))
 			total_inside++;
 	}
+	// Figure out what our estimate was.
+	return ((double) total_inside.get_value() / (double) total_iterations) * 4.0;
 }
 
 #endif
