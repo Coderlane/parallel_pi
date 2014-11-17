@@ -10,27 +10,42 @@
 #ifndef PARALLEL_PI_H
 #define PARALLEL_PI_H
 
+#include <cstdint>
+#include <cstdlib>
+
+using std::int32_t;
+using std::uint32_t;
+using std::uint64_t;
+
 /**
  * @brief 
  */
-class PICalc {
+class CircleSquare {
 
 	public:
-		PICalc(uint32_t radius);
+		CircleSquare(uint32_t radius);
 
-		uint64_t GetSquaredDistance(uint32_t x, uint32_t y);
+		bool IsInsideCircle(uint32_t x, uint32_t y);
+		bool IsInsideSquare(uint32_t x, uint32_t y);
 
 	private:
+		/**
+		 * @brief The input radius. 
+		 */
+		const uint32_t radius;
 
 		/**
-		 * @brief 
+		 * @brief Double the input radius. 
+		 * Used for IsInsideSquare.
 		 */
-		uint64_t squared_radius;
+		const uint32_t diameter;
 
 		/**
-		 * @brief 
+		 * @brief The input radius squared.
+		 * Used for IsInsideCircle.
 		 */
-		uint32_t radius
+		const uint64_t squared_radius;
+
+		uint64_t GetSquaredDistance(uint32_t x, uint32_t y);
 };
-
 #endif
