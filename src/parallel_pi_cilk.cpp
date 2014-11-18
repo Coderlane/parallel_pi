@@ -6,9 +6,11 @@
  * @date 2014-11-11
  */
 
-#include <parallel_pi_cilk.h>
-
 #ifdef PARALLEL_PI_USE_CILK
+
+#include <parallel_pi_cilk.h>
+#include <cilk/cilk.h>
+#include <cilk/reducer_opadd.h>
 
 double
 cilk_estimate_pi(CircleSquare cs, uint64_t total_iterations)

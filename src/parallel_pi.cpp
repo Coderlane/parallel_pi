@@ -6,21 +6,13 @@
  * @date 2014-11-16
  */
 
-
 #include <parallel_pi.h>
-#include <cassert>
 
-/**
- * @brief 
- *
- * @param new_radius
- */
-CircleSquare::CircleSquare(uint32_t new_radius) : 
-	radius(new_radius), diameter(new_radius * 2),
-	squared_radius(new_radius * new_radius) 
-{
-	assert(new_radius < INT32_MAX);
-}
+#include <cassert>
+#include <cstdlib>
+
+#include <iostream>
+#include <random>
 
 /**
  * @brief 
@@ -31,11 +23,11 @@ CircleSquare::CircleSquare(uint32_t new_radius) :
  * @return 
  */
 uint64_t 
-CircleSquare::GetSquaredDistance(uint32_t x, uint32_t y)
+GetSquaredDistance(int32_t x, int32_t y)
 {
 	uint64_t dx, dy;
-	dx = llabs(radius - x);
-	dy = llabs(radius - y);
+	dx = llabs(x);
+	dy = llabs(y);
 	return (dx * dx) + (dy * dy);
 }
 
@@ -47,8 +39,8 @@ CircleSquare::GetSquaredDistance(uint32_t x, uint32_t y)
  *
  * @return 
  */
-bool 
-CircleSquare::IsInsideCircle(uint32_t x, uint32_t y)
+bool
+IsInsideCircle(uint64_t squared_radius, int32_t x, int32_t y)
 {
 	return (GetSquaredDistance(x, y) < squared_radius);
 }
@@ -56,13 +48,21 @@ CircleSquare::IsInsideCircle(uint32_t x, uint32_t y)
 /**
  * @brief 
  *
- * @param x
- * @param y
+ * @param radius
+ * @param squared_radius
  *
  * @return 
  */
-bool
-CircleSquare::IsInsideSquare(uint32_t x, uint32_t y)
+bool 
+IsRandomInside(int32_t radius, uint64_t squared_radius)
 {
-	return (x < diameter && y < diameter);
+	int32_t x, y;
+	std::random_device rd;
+  std::mt19937 gen(rd());
+	std::uniform_int_distribution<int32_t> dist(-radius, radius);
+	x = dist(gen);
+	y = dist(gen);
+	//std::cerr << x << "," << y << std::endl;
+	return IsInsideCircle(squared_radius, x, y);
 }
+

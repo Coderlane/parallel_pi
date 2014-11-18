@@ -11,41 +11,13 @@
 #define PARALLEL_PI_H
 
 #include <cstdint>
-#include <cstdlib>
 
 using std::int32_t;
 using std::uint32_t;
 using std::uint64_t;
 
-/**
- * @brief 
- */
-class CircleSquare {
+uint64_t GetSquaredDistance(int32_t x, int32_t y);
+bool IsInsideCircle(uint64_t squared_radius, int32_t x, int32_t y);
+bool IsRandomInside(int32_t radius, uint64_t squared_radius);
 
-	public:
-		/**
-		 * @brief The input radius. 
-		 */
-		const uint32_t radius;
-
-		/**
-		 * @brief Double the input radius. 
-		 * Used for IsInsideSquare.
-		 */
-		const uint32_t diameter;
-
-		/**
-		 * @brief The input radius squared.
-		 * Used for IsInsideCircle.
-		 */
-		const uint64_t squared_radius;
-
-		CircleSquare(uint32_t radius);
-
-		bool IsInsideCircle(uint32_t x, uint32_t y);
-		bool IsInsideSquare(uint32_t x, uint32_t y);
-
-	private:
-		uint64_t GetSquaredDistance(uint32_t x, uint32_t y);
-};
 #endif
