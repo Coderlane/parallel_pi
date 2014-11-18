@@ -12,14 +12,19 @@
 #include <cilk/cilk.h>
 #include <cilk/reducer_opadd.h>
 
-double
+	double
 cilk_estimate_pi(int32_t radius, uint64_t total_iterations)
 {
 	const uint64_t squared_radius = (uint64_t) radius * (uint64_t) radius;
 	cilk::reducer_opadd<uint64_t> total_inside(0);
 
 	cilk_for(uint64_t i = 0; i < total_iterations; i++) {
-		if(IsRandomInside(radius, squared_radius))
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<int32_t> dist(-radius, radius);
+		x = dist(gen);
+		y = dist(gen);
+		if(IsInsideCircle(squared_radius, x, y))
 			total_inside++;
 	}
 	// Figure out what our estimate was.

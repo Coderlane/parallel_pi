@@ -57,8 +57,8 @@ bool
 IsRandomInside(int32_t radius, uint64_t squared_radius)
 {
 	int32_t x, y;
-	std::random_device rd;
-  std::mt19937 gen(rd());
+	//std::random_device rd;
+  std::mt19937 gen;//(rd());
 	std::uniform_int_distribution<int32_t> dist(-radius, radius);
 	x = dist(gen);
 	y = dist(gen);
