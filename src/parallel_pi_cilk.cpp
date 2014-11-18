@@ -19,6 +19,7 @@ cilk_estimate_pi(int32_t radius, uint64_t total_iterations)
 	cilk::reducer_opadd<uint64_t> total_inside(0);
 
 	cilk_for(uint64_t i = 0; i < total_iterations; i++) {
+		int32_t x, y;
 		std::random_device rd;
 		std::mt19937 gen(rd());
 		std::uniform_int_distribution<int32_t> dist(-radius, radius);
