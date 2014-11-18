@@ -13,14 +13,13 @@
 #include <cilk/reducer_opadd.h>
 
 double
-cilk_estimate_pi(CircleSquare cs, uint64_t total_iterations)
+cilk_estimate_pi(int32_t radius, uint64_t total_iterations)
 {
+	const uint64_t squared_radius = (uint64_t) radius * (uint64_t) radius;
 	cilk::reducer_opadd<uint64_t> total_inside(0);
+
 	cilk_for(uint64_t i; i < total_iterations; i++) {
-		uint32_t x, y;
-		x = 0;
-		y = 0;
-		if(cs.IsInsideCircle(x, y))
+		if(IsRandomInside(radius, squared_radius))
 			total_inside++;
 	}
 	// Figure out what our estimate was.
