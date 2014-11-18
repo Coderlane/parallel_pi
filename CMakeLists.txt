@@ -16,8 +16,11 @@ set(PARALLEL_PI_TEST ${PROJECT_SOURCE_DIR}/test)
 option(BUILD_CILK "Build cilk code" ON)
 option(BUILD_OPENMP "Build OpenMP code" ON)
 
+set(CILK_INCLUDE_DIR "" CACHE FILEPATH "Directory where the cilk forlder is located")
+set(CILK_LIBRARY_DIR "" CACHE FILEPATH "Directory where the cilk library is located")
+
 if(BUILD_CILK)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DPARALLEL_PI_USE_CILK -I ~/.local/include -fcilkplus -lcilkrts")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DPARALLEL_PI_USE_CILK -I${CILK_INCLUDE_DIR} -L${CILK_LIBRARY_DIR} -fcilkplus -lcilkrts")
 endif()
 
 if(BUILD_OPENMP)
