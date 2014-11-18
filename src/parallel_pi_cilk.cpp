@@ -19,8 +19,9 @@ cilk_estimate_pi(int32_t radius, uint64_t total_iterations)
 {
 	const uint64_t squared_radius = (uint64_t) radius * (uint64_t) radius;
 	cilk::reducer_opadd<uint64_t> total_inside(0);
-	
+
 	cilk_for(uint64_t i = 0; i < total_iterations; i++) {
+		int32_t x, y;
 		std::mt19937 gen(__cilkrts_get_pedigree());
 		std::uniform_int_distribution<int32_t> dist(-radius, radius);
 		x = dist(gen);
